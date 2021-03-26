@@ -1,3 +1,5 @@
+import { sliceString, dateFormat } from './helpers'
+
 export const state = () => ({
   // apiKey: 'AIzaSyA2CWPbc5gpeoeRzVUZJLKSHlqAm76hVyg',
   apiKey: 'AIzaSyCnrtoFJVKfSWDPn8DRjyAAHvlAicQkVk8',
@@ -34,17 +36,6 @@ export const actions = {
         image: video.snippet.thumbnails.medium.url,
         viewCount: +video.statistics.viewCount
       })
-      function sliceString (string) {
-        let newString = string.slice(0, 80)
-        if (newString.length < string.length) {
-          newString += '...'
-        }
-        return newString
-      }
-      function dateFormat (date) {
-        const newDate = new Date(date)
-        return `${newDate.getDate()} ${(newDate.getMonth() < 9 ? '0' + (newDate.getMonth() + 1) : (newDate.getMonth() + 1))} ${newDate.getFullYear()}`
-      }
       videosArray.sort((a, b) => a.viewCount < b.viewCount ? 1 : -1)
       return videosArray
     })
