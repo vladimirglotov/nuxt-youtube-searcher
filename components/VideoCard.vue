@@ -12,11 +12,11 @@
       <div
         class="md:p-1 md:px-2 max-w-sm md:max-w-none md:flex flex-col justify-between text-center md:text-left"
       >
-        <p class="text-base text-white font-semibold cursor-pointer" @click.prevent="openPlayer(index)">
+        <p class="text-base dark:text-white font-semibold cursor-pointer" @click.prevent="openPlayer(index)">
           {{ title }}
         </p>
         <div class="">
-          <div class="md:flex md:flex-row text-gray-200 cursor-default">
+          <div class="md:flex md:flex-row dark:text-gray-200 cursor-default">
             <div>
               {{ channelTitle }}
             </div>
@@ -33,7 +33,7 @@
     <iframe
       class="video flex h-0 rounded-b-lg transition-all"
       width="100%"
-      :height="calcVideoHeight()"
+      :height="calcVideoHeight"
       :src="calcSrc(id)"
       frameborder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -53,6 +53,13 @@ export default {
     description: String,
     index: Number
   },
+  data: () => ({
+    calcVideoHeight: ''
+  }),
+  mounted () {
+    const container = document.querySelector('.card')
+    this.calcVideoHeight = container.offsetWidth / 1.778
+  },
   methods: {
     openPlayer (i) {
       const videos = document.querySelectorAll('.video')
@@ -64,12 +71,6 @@ export default {
       } else {
         images[i].classList.add('md:rounded-l-lg')
         images[i].classList.remove('md:rounded-tl-lg')
-      }
-    },
-    calcVideoHeight () {
-      const container = document.querySelector('.card')
-      if (container) {
-        return (container.offsetWidth / 1.778)
       }
     },
     calcSrc (id) {
