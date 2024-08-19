@@ -24,20 +24,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import VideoCard from '../components/VideoCard'
+import { mapState } from 'vuex';
+import VideoCard from '../components/VideoCard';
+
 export default {
   components: { VideoCard },
-  data: () => ({
-  }),
   computed: {
     ...mapState(['videosToRender']),
     ...mapState(['serviceMessage'])
-  },
-  methods: {
   }
-}
+};
 </script>
-
-<style>
-</style>

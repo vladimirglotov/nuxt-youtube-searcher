@@ -18,7 +18,10 @@
       </button>
     </form>
     <div class="h-10 py-2">
-      <div v-if="videosToRender.length" class="dark:text-white cursor-default">
+      <div
+        v-if="videosToRender.length"
+        class="dark:text-white cursor-default"
+      >
         Результат поиска по запросу:
         <span class="px-1 text-red-500">{{ staticKeyWord }}</span>
       </div>
@@ -27,7 +30,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex';
+
 export default {
   data: () => ({
     keyWord: '',
@@ -41,12 +45,12 @@ export default {
       'resetVideosToRender'
     ]),
     getVideos () {
-      this.setNewServiceMessage('Идет поиск...')
-      this.resetVideosToRender()
-      this.$router.push('/' + this.keyWord)
-      this.staticKeyWord = this.keyWord
-      this.keyWord = ''
+      this.setNewServiceMessage('Идет поиск...');
+      this.resetVideosToRender();
+      this.$router.push('/' + this.keyWord);
+      this.staticKeyWord = this.keyWord;
+      this.keyWord = '';
     }
   }
-}
+};
 </script>

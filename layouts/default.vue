@@ -3,7 +3,10 @@
     <div
       class="items-center min-h-screen pb-2 flex-col flex bg-gray-300 dark:bg-gray-600"
     >
-      <div class="h-5 w-5 fixed right-1 m-1 md:m-2 cursor-pointer" @click="dark = !dark">
+      <div
+        class="h-5 w-5 fixed right-1 m-1 md:m-2 cursor-pointer"
+        @click="dark = !dark"
+      >
         <svg
           v-if="!dark"
           xmlns="http://www.w3.org/2000/svg"
@@ -36,11 +39,12 @@
 </template>
 
 <script>
-import InputForm from '../components/InputForm'
+import InputForm from '../components/InputForm';
+
 export default {
+  components: { InputForm },
   data: () => ({
     dark: false
-  }),
-  components: { InputForm }
-}
+  })
+};
 </script>

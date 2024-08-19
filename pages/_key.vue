@@ -24,33 +24,27 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import VideoCard from '../components/VideoCard'
+import { mapState } from 'vuex';
+import VideoCard from '../components/VideoCard';
+
 export default {
+  components: { VideoCard },
   async fetch ({ store, route }) {
     try {
-      await store.dispatch('fetchVideos', route.params.key)
+      await store.dispatch('fetchVideos', route.params.key);
     } catch (e) {
       if (e.message === 'Failed to fetch') {
-        store.dispatch('setNewServiceMessage', 'Вероятно есть неполадки с сетью')
-      } else if (e.message === "Cannot read property 'id' of undefined") {
-        store.dispatch('setNewServiceMessage', 'По вашему запросу ничего не найдено')
+        store.dispatch('setNewServiceMessage', 'Вероятно есть неполадки с сетью');
+      } else if (e.message === 'Cannot read property id of undefined') {
+        store.dispatch('setNewServiceMessage', 'По вашему запросу ничего не найдено');
       } else {
-        store.dispatch('setNewServiceMessage', 'Что-то пошло не так, попробуйте еще раз позже')
+        store.dispatch('setNewServiceMessage', 'Что-то пошло не так, попробуйте еще раз позже');
       }
     }
   },
-  components: { VideoCard },
-  data: () => ({
-  }),
   computed: {
     ...mapState(['videosToRender']),
     ...mapState(['serviceMessage'])
-  },
-  methods: {
   }
-}
+};
 </script>
-
-<style>
-</style>

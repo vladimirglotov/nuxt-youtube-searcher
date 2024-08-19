@@ -12,7 +12,10 @@
       <div
         class="md:p-1 md:px-2 max-w-sm md:max-w-none md:flex flex-col justify-between text-center md:text-left"
       >
-        <p class="text-base dark:text-white font-semibold cursor-pointer" @click.prevent="openPlayer(index)">
+        <p
+          class="text-base dark:text-white font-semibold cursor-pointer"
+          @click.prevent="openPlayer(index)"
+        >
           {{ title }}
         </p>
         <div class="">
@@ -45,37 +48,60 @@
 <script>
 export default {
   props: {
-    id: String,
-    title: String,
-    channelTitle: String,
-    publishTime: String,
-    image: String,
-    description: String,
-    index: Number
+    id: {
+      type: String,
+      default: ''
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    channelTitle: {
+      type: String,
+      default: ''
+    },
+    publishTime: {
+      type: String,
+      default: ''
+    },
+    image: {
+      type: String,
+      default: ''
+    },
+    description: {
+      type: String,
+      default: ''
+    },
+    index: {
+      type: Number,
+      default: 0
+    }
   },
   data: () => ({
     calcVideoHeight: ''
   }),
   mounted () {
-    const container = document.querySelector('.card')
-    this.calcVideoHeight = container.offsetWidth / 1.778
+    const container = document.querySelector('.card');
+    this.calcVideoHeight = container.offsetWidth / 1.778;
   },
   methods: {
     openPlayer (i) {
-      const videos = document.querySelectorAll('.video')
-      videos[i].classList.toggle('h-0')
-      const images = document.querySelectorAll('.image')
+      const videos = document.querySelectorAll('.video');
+      const images = document.querySelectorAll('.image');
+
+      videos[i].classList.toggle('h-0');
+
       if (images[i].classList.contains('md:rounded-l-lg')) {
-        images[i].classList.remove('md:rounded-l-lg')
-        images[i].classList.add('md:rounded-tl-lg')
+        images[i].classList.remove('md:rounded-l-lg');
+        images[i].classList.add('md:rounded-tl-lg');
       } else {
-        images[i].classList.add('md:rounded-l-lg')
-        images[i].classList.remove('md:rounded-tl-lg')
+        images[i].classList.add('md:rounded-l-lg');
+        images[i].classList.remove('md:rounded-tl-lg');
       }
     },
     calcSrc (id) {
-      return 'https://www.youtube.com/embed/' + id
+      return 'https://www.youtube.com/embed/' + id;
     }
   }
-}
+};
 </script>

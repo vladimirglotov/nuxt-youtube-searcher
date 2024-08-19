@@ -2,14 +2,14 @@ module.exports = {
   purge: [
     './src/**/*.html',
     './src/**/*.vue',
-    './src/**/*.jsx',
+    './src/**/*.jsx'
   ],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {}
   },
   variants: {
-    extend: {},
+    extend: {}
   },
-  plugins: [],
-}
+  plugins: []
+};
