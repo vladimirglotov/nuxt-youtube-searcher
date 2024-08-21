@@ -1,7 +1,7 @@
 <template>
-  <div :class="{dark}">
+  <div :class="[dark && 'dark', 'min-h-screen']">
     <div
-      class="items-center min-h-screen pb-2 flex-col flex bg-gray-300 dark:bg-gray-600"
+      class="items-center min-h-screen h-full pb-2 flex-col flex bg-gray-300 dark:bg-gray-600 relative"
     >
       <div
         class="h-5 w-5 fixed right-1 m-1 md:m-2 cursor-pointer"

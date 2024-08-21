@@ -1,12 +1,6 @@
 <template>
-  <div class="flex card md:p-3 items-center flex-col w-10/12 lg:w-3/4 xl:w-7/12">
-    <div
-      v-if="videosToRender == false"
-      class="md:p-1 dark:text-white max-w-sm md:max-w-none text-center md:text-left cursor-default"
-    >
-      <h1>{{ serviceMessage || 'Здесь появятся результаты по вашему запросу' }}</h1>
-    </div>
-    <div v-else>
+  <div class="flex h-full card md:p-3 items-center flex-col w-10/12 lg:w-3/4 xl:w-7/12">
+    <div v-if="videosToRender.length">
       <VideoCard
         v-for="(v, i) in videosToRender"
         :id="v.id"
@@ -34,11 +28,11 @@ export default {
       await store.dispatch('fetchVideos', route.params.key);
     } catch (e) {
       if (e.message === 'Failed to fetch') {
-        store.dispatch('setNewServiceMessage', 'Вероятно есть неполадки с сетью');
+        store.dispatch('setNewServiceMessage', 'There might be network issues');
       } else if (e.message === 'Cannot read property id of undefined') {
-        store.dispatch('setNewServiceMessage', 'По вашему запросу ничего не найдено');
+        store.dispatch('setNewServiceMessage', 'No results found for your query');
       } else {
-        store.dispatch('setNewServiceMessage', 'Что-то пошло не так, попробуйте еще раз позже');
+        store.dispatch('setNewServiceMessage', 'Something went wrong, please try again later');
       }
     }
   },

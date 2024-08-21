@@ -34,6 +34,7 @@ module.exports = {
     'vue/multiline-html-element-content-newline': 'off',
     'vue/name-property-casing': ['error', 'PascalCase'],
     'vue/no-v-html': 'off',
+    'vue/html-self-closing': 'off',
     semi: ['error', 'always'],
     quotes: ['error', 'single'],
     indent: ['error', 2]

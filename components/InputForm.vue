@@ -4,17 +4,18 @@
       class="flex md:max-w-lg flex-row justify-between flex-nowrap pt-10"
     >
       <input
+        id="keyWord"
         v-model="keyWord"
         v:on
         class="w-56 md:w-80 p-1 px-2 dark:text-gray-200 rounded-md focus:outline-none focus:ring-1 ring-1 ring-gray-800 focus:ring-red-600 focus:border-transparent dark:bg-gray-800"
-        placeholder="Введите слово для поиска"
+        placeholder="Enter a keyword for search"
         type="text"
       >
       <button
-        class="mx-2 md:ml-8 dark:bg-gray-800 py-1 px-3 dark:text-gray-200 ring-1 ring-red-600 hover:bg-white rounded-md focus:outline-none"
+        class="mx-2 md:ml-8 ring-1 ring-red-600 hover:bg-white rounded-md focus:outline-none focus:bg-red-600 focus:text-white focus:ring-red-600 dark:bg-gray-800 py-1 px-3 dark:text-gray-200 dark:focus:bg-red-600  dark:focus:ring-black dark:focus:text-black"
         @click.prevent="getVideos"
       >
-        Поиск
+        Search
       </button>
     </form>
     <div class="h-10 py-2">
@@ -22,7 +23,7 @@
         v-if="videosToRender.length"
         class="dark:text-white cursor-default"
       >
-        Результат поиска по запросу:
+        Search results for the query:
         <span class="px-1 text-red-500">{{ staticKeyWord }}</span>
       </div>
     </div>
@@ -40,7 +41,6 @@ export default {
   computed: mapState(['videosToRender']),
   methods: {
     ...mapActions([
-      'fetchVideos',
       'setNewServiceMessage',
       'resetVideosToRender'
     ]),
