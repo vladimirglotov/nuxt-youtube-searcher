@@ -1,6 +1,9 @@
 <template>
-  <div class="flex h-full card md:p-3 items-center flex-col w-10/12 lg:w-3/4 xl:w-7/12">
-    <div v-if="videosToRender.length">
+  <div
+    ref="videosRef"
+    class="flex h-full md:p-3 items-center flex-col w-10/12 lg:w-3/4 xl:w-7/12 py-5"
+  >
+    <template v-if="videosToRender.length">
       <VideoCard
         v-for="(v, i) in videosToRender"
         :id="v.id"
@@ -11,9 +14,10 @@
         :description="v.description"
         :image="v.image"
         :index="i"
+        :video-height="videoHeight"
         class="md:flex shadow-lg bg-white dark:bg-gray-800 flex-col rounded-xl my-4 md:min-w-full"
       />
-    </div>
+    </template>
   </div>
 </template>
 
@@ -21,8 +25,13 @@
 import { mapState } from 'vuex';
 import VideoCard from '../components/VideoCard';
 
+const RATIO = 1.778;
+
 export default {
   components: { VideoCard },
+  data: () => ({
+    videoHeight: 0
+  }),
   async fetch ({ store, route }) {
     try {
       await store.dispatch('fetchVideos', route.params.key);
@@ -39,6 +48,11 @@ export default {
   computed: {
     ...mapState(['videosToRender']),
     ...mapState(['serviceMessage'])
+  },
+  mounted () {
+    const container = this.$refs.videosRef;
+
+    this.videoHeight = container.offsetWidth / RATIO;
   }
 };
 </script>

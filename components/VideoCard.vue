@@ -2,19 +2,20 @@
   <div class="md:w-full">
     <div class="md:min-w-full md:flex">
       <img
-        class="image md:w-48 md:max-h-28 rounded-t-lg md:h-auto md:rounded-none md:rounded-l-lg cursor-pointer"
+        ref="image"
+        :class="[isOpen ? 'md:rounded-tl-lg' : 'md:rounded-l-lg', 'md:w-48', 'md:max-h-28', 'rounded-t-lg', 'md:h-auto', 'md:rounded-none', 'cursor-pointer']"
         :src="image"
-        alt=""
+        alt="Video preview"
         width="384"
         height="512"
-        @click.prevent="openPlayer(index)"
+        @click="isOpen = !isOpen"
       >
       <div
         class="md:p-1 md:px-2 max-w-sm md:max-w-none md:flex flex-col justify-between text-center md:text-left"
       >
         <p
           class="text-base dark:text-white font-semibold cursor-pointer"
-          @click.prevent="openPlayer(index)"
+          @click="isOpen = !isOpen"
         >
           {{ title }}
         </p>
@@ -34,10 +35,11 @@
       </div>
     </div>
     <iframe
-      class="video flex h-0 rounded-b-lg transition-all"
+      ref="video"
+      :class="[!isOpen && 'h-0', 'flex', 'rounded-b-lg']"
       width="100%"
-      :height="calcVideoHeight"
-      :src="calcSrc(id)"
+      :height="videoHeight"
+      :src="src"
       frameborder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
@@ -72,35 +74,17 @@ export default {
       type: String,
       default: ''
     },
-    index: {
+    videoHeight: {
       type: Number,
       default: 0
     }
   },
   data: () => ({
-    calcVideoHeight: ''
+    isOpen: false
   }),
-  mounted () {
-    const container = document.querySelector('.card');
-    this.calcVideoHeight = container.offsetWidth / 1.778;
-  },
-  methods: {
-    openPlayer (i) {
-      const videos = document.querySelectorAll('.video');
-      const images = document.querySelectorAll('.image');
-
-      videos[i].classList.toggle('h-0');
-
-      if (images[i].classList.contains('md:rounded-l-lg')) {
-        images[i].classList.remove('md:rounded-l-lg');
-        images[i].classList.add('md:rounded-tl-lg');
-      } else {
-        images[i].classList.add('md:rounded-l-lg');
-        images[i].classList.remove('md:rounded-tl-lg');
-      }
-    },
-    calcSrc (id) {
-      return 'https://www.youtube.com/embed/' + id;
+  computed: {
+    src () {
+      return 'https://www.youtube.com/embed/' + this.id;
     }
   }
 };
