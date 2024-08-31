@@ -39,13 +39,18 @@ export default {
     staticKeyWord: ''
   }),
   computed: mapState(['videosToRender']),
+  mounted () {
+    if (this.$route.path && !this.staticKeyWord) {
+      this.staticKeyWord = this.$route.path.startsWith('/') ? this.$route.path.slice(1) : this.$route.path;
+    }
+  },
   methods: {
     ...mapActions([
       'setNewServiceMessage',
       'resetVideosToRender'
     ]),
     getVideos () {
-      this.setNewServiceMessage('Идет поиск...');
+      this.setNewServiceMessage('Searching...');
       this.resetVideosToRender();
       this.$router.push('/' + this.keyWord);
       this.staticKeyWord = this.keyWord;

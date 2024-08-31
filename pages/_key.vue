@@ -5,7 +5,7 @@
   >
     <template v-if="videosToRender.length">
       <VideoCard
-        v-for="(v, i) in videosToRender"
+        v-for="v in videosToRender"
         :id="v.id"
         :key="v.id"
         :title="v.title"
@@ -13,7 +13,6 @@
         :publish-time="v.publishTime"
         :description="v.description"
         :image="v.image"
-        :index="i"
         :video-height="videoHeight"
         class="md:flex shadow-lg bg-white dark:bg-gray-800 flex-col rounded-xl my-4 md:min-w-full"
       />
@@ -53,6 +52,7 @@ export default {
     const container = this.$refs.videosRef;
 
     this.videoHeight = container.offsetWidth / RATIO;
+    // TODO: Add resize listener to renew videoHeight
   }
 };
 </script>

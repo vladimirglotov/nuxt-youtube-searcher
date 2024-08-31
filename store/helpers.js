@@ -38,3 +38,15 @@ export function getVideosArray (items) {
     };
   });
 }
+
+export function mockVideos () {
+  return Array.from({ length: 10 }, (_, index) => ({
+    id: `${index + 1}`,
+    title: `${index + 1}`,
+    channelTitle: `${index + 1}`,
+    description: `${index + 1}`,
+    publishTime: `${index + 1}`,
+    image: 'https://i.ytimg.com/an_webp/fji0mc_P-08/mqdefault_6s.webp?du=3000&sqp=CK3AmLYG&rs=AOn4CLDqHu9Vd7wDjwnWpEFYq5RJcB4X5g',
+    viewCount: index
+  }));
+}
